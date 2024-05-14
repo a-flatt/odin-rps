@@ -42,30 +42,24 @@ function playRound (humanChoice, computerChoice) {
     }
 }
 
-function playGame () {
+const buttons = document.querySelectorAll("button");
+const humanScore = document.querySelector("#human-score");
+const computerScore = document.querySelector("#computer-score");
+const result = document.querySelector("#result");
 
-    const buttons = document.querySelectorAll("button");
-    const humanScore = document.querySelector("#human-score");
-    const computerScore = document.querySelector("#computer-score");
-    const result = document.querySelector("#result");
+buttons.forEach(button => {
+    button.addEventListener("click", obj => {
+        const humanChoice = obj.target.textContent.toLowerCase();
+        const computerChoice = getComputerChoice();
+        playRound(humanChoice, computerChoice);
+        humanScore.textContent = HUMAN_SCORE;
+        computerScore.textContent = COMPUTER_SCORE;
 
-    buttons.forEach(button => {
-        button.addEventListener("click", obj => {
-            const humanChoice = obj.target.textContent.toLowerCase();
-            const computerChoice = getComputerChoice();
-            playRound(humanChoice, computerChoice);
-            humanScore.textContent = HUMAN_SCORE;
-            computerScore.textContent = COMPUTER_SCORE;
-
-            if (HUMAN_SCORE == 5) {
-                result.textContent = "You Win!"
-            }
-            if (COMPUTER_SCORE == 5) {
-                result.textContent = "You Lose!";
-            }
-        });
-    })
-    
-}
-
-playGame();
+        if (HUMAN_SCORE == 5) {
+            result.textContent = "You Win!"
+        }
+        if (COMPUTER_SCORE == 5) {
+            result.textContent = "You Lose!";
+        }
+    });
+})
